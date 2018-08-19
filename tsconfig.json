@@ -15,6 +15,26 @@
     "lib": [
       "es2017",
       "dom"
-    ]
+    ],
+    "paths": {
+      "mdc-autocomplete": [
+        "dist/mdc-autocomplete"
+      ],
+      "mdc-autocomplete/*": [
+        "dist/mdc-autocomplete/*"
+      ],
+      "mdc-autocomplete-list-item": [
+        "dist/mdc-autocomplete-list-item"
+      ],
+      "mdc-autocomplete-list-item/*": [
+        "dist/mdc-autocomplete-list-item/*"
+      ],
+      "mdc-autocomplete-list": [
+        "dist/mdc-autocomplete-list"
+      ],
+      "mdc-autocomplete-list/*": [
+        "dist/mdc-autocomplete-list/*"
+      ]
+    }
   }
 }

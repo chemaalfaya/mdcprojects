@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  onItemSelected(event: Event) {
+    console.log('app:' + event);
+  }
 }

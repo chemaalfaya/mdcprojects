@@ -45,7 +45,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.sass"
             ],
             "scripts": []
           },
@@ -94,7 +94,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.css"
+              "src/styles.sass"
             ],
             "scripts": [],
             "assets": [
@@ -132,6 +132,126 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "mdc-autocomplete": {
+      "root": "projects/mdc-autocomplete",
+      "sourceRoot": "projects/mdc-autocomplete/src",
+      "projectType": "library",
+      "prefix": "mdc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/mdc-autocomplete/tsconfig.lib.json",
+            "project": "projects/mdc-autocomplete/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/mdc-autocomplete/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mdc-autocomplete/src/test.ts",
+            "tsConfig": "projects/mdc-autocomplete/tsconfig.spec.json",
+            "karmaConfig": "projects/mdc-autocomplete/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mdc-autocomplete/tsconfig.lib.json",
+              "projects/mdc-autocomplete/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "mdc-autocomplete-list-item": {
+      "root": "projects/mdc-autocomplete-list-item",
+      "sourceRoot": "projects/mdc-autocomplete-list-item/src",
+      "projectType": "library",
+      "prefix": "mdc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/mdc-autocomplete-list-item/tsconfig.lib.json",
+            "project": "projects/mdc-autocomplete-list-item/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/mdc-autocomplete-list-item/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mdc-autocomplete-list-item/src/test.ts",
+            "tsConfig": "projects/mdc-autocomplete-list-item/tsconfig.spec.json",
+            "karmaConfig": "projects/mdc-autocomplete-list-item/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mdc-autocomplete-list-item/tsconfig.lib.json",
+              "projects/mdc-autocomplete-list-item/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "mdc-autocomplete-list": {
+      "root": "projects/mdc-autocomplete-list",
+      "sourceRoot": "projects/mdc-autocomplete-list/src",
+      "projectType": "library",
+      "prefix": "mdc",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/mdc-autocomplete-list/tsconfig.lib.json",
+            "project": "projects/mdc-autocomplete-list/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/mdc-autocomplete-list/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mdc-autocomplete-list/src/test.ts",
+            "tsConfig": "projects/mdc-autocomplete-list/tsconfig.spec.json",
+            "karmaConfig": "projects/mdc-autocomplete-list/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/mdc-autocomplete-list/tsconfig.lib.json",
+              "projects/mdc-autocomplete-list/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
