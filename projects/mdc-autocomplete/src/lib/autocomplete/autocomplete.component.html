@@ -1,6 +1,7 @@
 <div class="autocomplete">
-  <mdc-text-field #textField [(ngModel)]="value" (keyup)="onTextFieldChange()"
-  (click)="onFocus(true)" (focus)="onFocus(true)" (focusout)="onFocus(false)" (blur)="onFocus(false)">
+  <mdc-text-field #textField [(ngModel)]="value" (keydown)="onKeyDown($event)" (keyup)="onKeyUp($event)"
+  (click)="onFocus(true)" (focus)="onFocus(true)" (focusout)="onFocus(false)" (blur)="onFocus(false)"
+  autocomplete="off" autocorrect="off" autocapitalize="off">
   </mdc-text-field>
   <ng-content select="mdc-autocomplete-list"></ng-content>
 </div>

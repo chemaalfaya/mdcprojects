@@ -15,7 +15,13 @@ export class MdcAutocomplete implements OnInit, AfterContentInit {
   @ViewChild('textField') textField: MdcTextField;
   @ContentChild(MdcAutocompleteList) autocompleteList: MdcAutocompleteList;
 
-  value: string;
+  _value: string;
+  public get value(): string { return this._value; }
+  public set value(val: string) {
+    this._value = val;
+    this.autocompleteList.filter = val;
+  }
+
   selectedItemValue: any;
 
   constructor() { }
@@ -24,13 +30,30 @@ export class MdcAutocomplete implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
+    this.setNativeInputAtrributes();
+
     this.autocompleteList.itemSelected.subscribe((itemValue) => {
-      console.log('autocomplete.onItemClicked -> ' + itemValue);
+      // console.log('autocomplete.onItemClicked -> ' + itemValue);
       this.selectedItemValue = itemValue;
       this.value = itemValue.toString();
       this.itemSelected.emit(itemValue);
       this.autocompleteList.visible = false;
     });
+  }
+
+  onKeyDown(event: KeyboardEvent) {
+    if (event.key === 'ArrowDown') {
+      this.autocompleteList.focusNextItem();
+    } else if (event.key === 'ArrowUp') {
+      this.autocompleteList.focusPreviousItem();
+    } else if (event.key === 'Enter') {
+      this.autocompleteList.selectFocusedItem();
+    }
+  }
+  onKeyUp(event: KeyboardEvent) {
+    if (event.key !== 'ArrowDown' && event.key !== 'ArrowUp' && event.key !== 'Enter') {
+      this.onTextFieldChange();
+    }
   }
 
   onTextFieldChange() {
@@ -44,4 +67,12 @@ export class MdcAutocomplete implements OnInit, AfterContentInit {
     }, 100);
   }
 
+  private setNativeInputAtrributes() {
+    const nativeInput: HTMLInputElement = this.textField.elementRef.nativeElement.querySelector('input');
+    nativeInput.autocomplete = 'off';
+    // @ts-ignore
+    nativeInput.autocorrect = 'off';
+    // @ts-ignore
+    nativeInput.autocapitalize = 'off';
+  }
 }

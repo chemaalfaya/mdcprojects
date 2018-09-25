@@ -23,6 +23,9 @@ export class MdcAutocompleteList implements OnInit, AfterContentChecked {
 
   public set visible(v: boolean) {
     this._visible = v;
+    if (!v) {
+      this.unfocusAllItems();
+    }
   }
 
   public get filter(): string {
@@ -47,11 +50,66 @@ export class MdcAutocompleteList implements OnInit, AfterContentChecked {
     this.autocompleteListItems.toArray().forEach((item) => {
       if (item.itemClicked.observers.length === 0) { // Only allow one subscription
         item.itemClicked.subscribe((itemValue) => {
-          console.log('autocomplete-list.onItemClicked -> ' + itemValue);
+          // console.log('autocomplete-list.onItemClicked -> ' + itemValue);
           this.itemSelected.next(itemValue);
         });
       }
     });
+  }
+
+  public unfocusAllItems() {
+    this.autocompleteListItems.toArray().forEach((item) => {
+      item.focused = false;
+    });
+  }
+
+  public focusNextItem() {
+    const focusedItems = this.autocompleteListItems.filter((item, index, list) => item.focused);
+    const focusedItem = focusedItems.length > 0 ? focusedItems[0] : null;
+    const visibleItems = this.autocompleteListItems.filter((item, index, list) => item.visible);
+
+    if (focusedItem) {
+      const focusedItemIndex = visibleItems.indexOf(focusedItem);
+      const nextFocusedItem = (visibleItems.length >= focusedItemIndex + 1) ? visibleItems[focusedItemIndex + 1] : null;
+      if (nextFocusedItem) {
+        focusedItem.focused = false;
+        nextFocusedItem.focused = true;
+        nextFocusedItem.scrollIntoView();
+      }
+    } else {
+      if (visibleItems.length > 0) {
+        visibleItems[0].focused = true;
+      }
+    }
+  }
+
+  public focusPreviousItem() {
+    const focusedItems = this.autocompleteListItems.filter((item, index, list) => item.focused);
+    const focusedItem = focusedItems.length > 0 ? focusedItems[0] : null;
+    const visibleItems = this.autocompleteListItems.filter((item, index, list) => item.visible);
+
+    if (focusedItem) {
+      const focusedItemIndex = visibleItems.indexOf(focusedItem);
+      const previousFocusedItem = (focusedItemIndex > 0) ? visibleItems[focusedItemIndex - 1] : null;
+      if (previousFocusedItem) {
+        focusedItem.focused = false;
+        previousFocusedItem.focused = true;
+        previousFocusedItem.scrollIntoView();
+      }
+    } else {
+      if (visibleItems.length > 0) {
+        visibleItems[0].focused = true;
+      }
+    }
+  }
+
+  public selectFocusedItem() {
+    const focusedItems = this.autocompleteListItems.filter((item, index, list) => item.focused);
+    const focusedItem = focusedItems.length > 0 ? focusedItems[0] : null;
+
+    if (focusedItem) {
+      this.itemSelected.next(focusedItem.value);
+    }
   }
 
   private filterItems() {
@@ -62,8 +120,8 @@ export class MdcAutocompleteList implements OnInit, AfterContentChecked {
         showing++;
       } else {
         item.visible = false;
+        item.focused = false;
       }
     });
   }
-
 }

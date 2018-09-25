@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, ElementRef } from '@angular/core';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -11,7 +11,10 @@ export class MdcAutocompleteListItem implements OnInit {
 
   @Input() value: any;
   @Input() filterString: string;
+  @Input() focused: boolean;
   @Output() public itemClicked: Subject<any> = new Subject();
+
+  @ViewChild('li') li: ElementRef;
 
   private _visible: boolean;
 
@@ -30,8 +33,16 @@ export class MdcAutocompleteListItem implements OnInit {
   ngOnInit() {
   }
 
+  public scrollIntoView() {
+    this.li.nativeElement.parentElement.scrollIntoView({
+      behaviour: 'auto',
+      block: 'nearest',
+      inline: 'nearest'
+    });
+  }
+
   onItemClicked() {
-    console.log('autocomplete-list-item.onItemClicked -> ' + this.value);
+    // console.log('autocomplete-list-item.onItemClicked -> ' + this.value);
     this.itemClicked.next(this.value);
   }
 
