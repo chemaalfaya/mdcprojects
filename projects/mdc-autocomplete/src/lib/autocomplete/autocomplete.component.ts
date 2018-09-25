@@ -25,6 +25,7 @@ export class MdcAutocomplete implements OnInit, AfterContentInit {
 
   ngAfterContentInit() {
     this.autocompleteList.itemSelected.subscribe((itemValue) => {
+      console.log('autocomplete.onItemClicked -> ' + itemValue);
       this.selectedItemValue = itemValue;
       this.value = itemValue.toString();
       this.itemSelected.emit(itemValue);

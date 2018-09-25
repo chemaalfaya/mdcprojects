@@ -19,13 +19,18 @@
 </ul>
 
 <span>Aquí va un poco de texto inline</span>
-<mdc-autocomplete (itemSelected)="onItemSelected($event)">
+<mdc-autocomplete #autocomplete (itemSelected)="onItemSelected($event)">
   <mdc-autocomplete-list> <!-- [maxVisibleItems]="2" -->
-    <mdc-autocomplete-list-item *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]" [value]="'Contenido ' + i" [filterString]="'Contenido ' + i">
+    <!-- <mdc-autocomplete-list-item *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]" [value]="'Contenido ' + i" [filterString]="'Contenido ' + i"> -->
+    <mdc-autocomplete-list-item *ngFor="let i of items | async" [value]="'Contenido ' + i" [filterString]="'Contenido ' + i">
       <h3>Contenido {{i}}</h3>
     </mdc-autocomplete-list-item>
   </mdc-autocomplete-list>
 </mdc-autocomplete>
+
+<div style="background-color: red; min-height: 30px;">
+  {{ items | async }}
+</div>
 
 
 <div style="text-align:center">

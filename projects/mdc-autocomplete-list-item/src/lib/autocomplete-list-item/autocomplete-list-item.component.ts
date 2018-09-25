@@ -31,6 +31,7 @@ export class MdcAutocompleteListItem implements OnInit {
   }
 
   onItemClicked() {
+    console.log('autocomplete-list-item.onItemClicked -> ' + this.value);
     this.itemClicked.next(this.value);
   }
 

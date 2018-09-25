@@ -1,4 +1,4 @@
-import { Component, OnInit, ContentChildren, QueryList, Input, AfterContentInit, Output } from '@angular/core';
+import { Component, OnInit, ContentChildren, QueryList, Input, Output, AfterContentChecked } from '@angular/core';
 import { MdcAutocompleteListItem } from 'mdc-autocomplete-list-item';
 import { Subject } from 'rxjs';
 
@@ -8,7 +8,7 @@ import { Subject } from 'rxjs';
   styleUrls: ['./autocomplete-list.component.sass']
 })
 // tslint:disable-next-line:component-class-suffix
-export class MdcAutocompleteList implements OnInit, AfterContentInit {
+export class MdcAutocompleteList implements OnInit, AfterContentChecked {
 
   @Input() maxVisibleItems: number;
   @Output() public itemSelected: Subject<any> = new Subject();
@@ -43,11 +43,14 @@ export class MdcAutocompleteList implements OnInit, AfterContentInit {
   ngOnInit() {
   }
 
-  ngAfterContentInit() {
+  ngAfterContentChecked() {
     this.autocompleteListItems.toArray().forEach((item) => {
-      item.itemClicked.subscribe((itemValue) => {
-        this.itemSelected.next(itemValue);
-      });
+      if (item.itemClicked.observers.length === 0) { // Only allow one subscription
+        item.itemClicked.subscribe((itemValue) => {
+          console.log('autocomplete-list.onItemClicked -> ' + itemValue);
+          this.itemSelected.next(itemValue);
+        });
+      }
     });
   }
 
