@@ -23,7 +23,9 @@ export class MdcAutocompleteList implements OnInit, AfterContentChecked {
 
   public set visible(v: boolean) {
     this._visible = v;
-    if (!v) {
+    if (v) {
+      this.focusFirstItem();
+    } else {
       this.unfocusAllItems();
     }
   }
@@ -35,6 +37,7 @@ export class MdcAutocompleteList implements OnInit, AfterContentChecked {
   public set filter(f: string) {
     this._filter = f;
     this.filterItems();
+    this.focusFirstItem();
   }
 
   constructor() {
@@ -52,6 +55,13 @@ export class MdcAutocompleteList implements OnInit, AfterContentChecked {
         item.itemClicked.subscribe((itemValue) => {
           // console.log('autocomplete-list.onItemClicked -> ' + itemValue);
           this.itemSelected.next(itemValue);
+        });
+      }
+
+      if (item.itemHovered.observers.length === 0) { // Only allow one subscription
+        item.itemHovered.subscribe((itemValue) => {
+          this.unfocusAllItems();
+          item.focused = true;
         });
       }
     });
@@ -100,6 +110,14 @@ export class MdcAutocompleteList implements OnInit, AfterContentChecked {
       if (visibleItems.length > 0) {
         visibleItems[0].focused = true;
       }
+    }
+  }
+
+  public focusFirstItem() {
+    this.unfocusAllItems();
+    const visibleItems = this.autocompleteListItems.filter((item, index, list) => item.visible);
+    if (visibleItems.length > 0) {
+      visibleItems[0].focused = true;
     }
   }
 

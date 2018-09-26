@@ -13,6 +13,7 @@ export class MdcAutocompleteListItem implements OnInit {
   @Input() filterString: string;
   @Input() focused: boolean;
   @Output() public itemClicked: Subject<any> = new Subject();
+  @Output() public itemHovered: Subject<any> = new Subject();
 
   @ViewChild('li') li: ElementRef;
 
@@ -46,4 +47,7 @@ export class MdcAutocompleteListItem implements OnInit {
     this.itemClicked.next(this.value);
   }
 
+  onHover() {
+    this.itemHovered.next(this.value);
+  }
 }
