@@ -7,7 +7,7 @@ MdcAutocomplete in conjunction with MdcAutocompleteList and MdcAutocompleteListI
 You can [get started](https://trimox.github.io/angular-mdc-web/#/getting-started) with Angular MDC in its webpage or in its [GitHub page](https://github.com/trimox/angular-mdc-web).
 
 ![Demonstration Gif][gif]
-[gif]: https://github.com/chemaalfaya/mdcprojects/raw/master/src/assets/mdc-autocomplete.gif "Demonstration Gif"
+[gif]: https://raw.githubusercontent.com/chemaalfaya/mdcprojects/master/src/assets/mdc-autocomplete.gif "Demonstration Gif"
 
 ### Features
 * Live **filtering** while writting
@@ -62,6 +62,13 @@ Clone the repository:
 ```
 git clone https://github.com/chemaalfaya/mdcprojects.git
 ```
+
+While developing, in order to see the changes you made in your served app, don't forget to build the project you have modified:
+
+	cd projects
+	ng build mdc-autocomplete-list-item
+	ng build mdc-autocomplete-list
+	ng build mdc-autocomplete
 
 And... happy coding!
 

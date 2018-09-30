@@ -33,7 +33,6 @@ export class MdcAutocomplete implements OnInit, AfterContentInit {
     this.setNativeInputAtrributes();
 
     this.autocompleteList.itemSelected.subscribe((itemValue) => {
-      // console.log('autocomplete.onItemClicked -> ' + itemValue);
       this.selectedItemValue = itemValue;
       this.value = itemValue.toString();
       this.itemSelected.emit(itemValue);

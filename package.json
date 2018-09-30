@@ -1,6 +1,7 @@
 {
   "name": "mdcprojects",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "description": "MdcAutocomplete in conjunction with MdcAutocompleteList and MdcAutocompleteListItem are a pack of angular components to provide an autocomplete functionality to Angular MDC web.",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +10,19 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "private": true,
+  "keywords": [
+    "autocomplete", "angular", "material", "angular-mdc", "mdc", "web"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chemaalfaya/mdcprojects.git"
+  },
+  "author": {
+    "name": "Chema Alfaya Montero",
+    "email": "chemaalfaya@gmail.com",
+    "url": "http://www.chemaalfaya.com"
+  },
+  "private": false,
   "dependencies": {
     "@angular-mdc/theme": "^0.38.1",
     "@angular-mdc/web": "^0.38.1",

@@ -1,8 +1,7 @@
 <div class="app-container">
   <h2>MdcAutocomplete</h2>
   <mdc-autocomplete #autocomplete (itemSelected)="onItemSelected($event)">
-    <mdc-autocomplete-list> <!-- [maxVisibleItems]="2" -->
-      <!-- <mdc-autocomplete-list-item *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]" [value]="'Contenido ' + i" [filterString]="'Contenido ' + i"> -->
+    <mdc-autocomplete-list [maxVisibleItems]="100">
       <mdc-autocomplete-list-item *ngFor="let item of getItems() | async" [value]="item" [filterString]="item.name">
         <img class="item-icon" src="{{item.icon}}"/>
         <span class="item-name">{{item.name}}</span>

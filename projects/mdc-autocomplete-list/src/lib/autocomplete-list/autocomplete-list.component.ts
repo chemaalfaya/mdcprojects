@@ -53,7 +53,6 @@ export class MdcAutocompleteList implements OnInit, AfterContentChecked {
     this.autocompleteListItems.toArray().forEach((item) => {
       if (item.itemClicked.observers.length === 0) { // Only allow one subscription
         item.itemClicked.subscribe((itemValue) => {
-          // console.log('autocomplete-list.onItemClicked -> ' + itemValue);
           this.itemSelected.next(itemValue);
         });
       }
