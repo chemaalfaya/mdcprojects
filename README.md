@@ -1,27 +1,85 @@
-# Mdcprojects
+# MdcAutocomplete
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
+[![npm version](https://badge.fury.io/js/mdc-autocomplete.svg)](https://badge.fury.io/js/mdc-autocomplete)
 
-## Development server
+MdcAutocomplete in conjunction with MdcAutocompleteList and MdcAutocompleteListItem are a pack of angular components to provide an autocomplete functionality to [Angular MDC](https://trimox.github.io/angular-mdc-web/#/home) web.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+You can [get started](https://trimox.github.io/angular-mdc-web/#/getting-started) with Angular MDC in its webpage or in its [GitHub page](https://github.com/trimox/angular-mdc-web).
 
-## Code scaffolding
+![Demonstration Gif][gif]
+[gif]: https://github.com/chemaalfaya/mdcprojects/raw/master/src/assets/mdc-autocomplete.gif "Demonstration Gif"
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Features
+* Live **filtering** while writting
+* **Mouse hover** and selection
+* Selection using **arrows** and **enter** keys
+* Customizable **max results** number
+* OnSelection **event emission**
 
-## Build
+## <a name="installation"></a> Install Angular MdcAutocomplete
+Assuming you already have angular-mdc-web up and running, install mdc-autocomplete by executing the following command:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```
+npm i mdc-autocomplete-list-item mdc-autocomplete-list mdc-autocomplete
+```
 
-## Running unit tests
+## <a name="getstarted"></a> Getting started
+In your angular module:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+	import { MdcAutocompleteModule } from 'mdc-autocomplete';
+	import { MdcAutocompleteListModule } from 'mdc-autocomplete-list';
+	import { MdcAutocompleteListItemModule } from 'mdc-autocomplete-list-item';
+	
+	@NgModule({
+	  ...
+	  imports: [
+	    ...
+	    MdcAutocompleteModule,
+	    MdcAutocompleteListModule,
+	    MdcAutocompleteListItemModule
+	  ],
+	  ...
+	})
 
-## Running end-to-end tests
+In your angular component html file:
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+	<mdc-autocomplete (itemSelected)="onAutocompleteItemSelected($event)">
+		<mdc-autocomplete-list [maxVisibleItems]="10">
+    		<mdc-autocomplete-list-item *ngFor="let item of getItems() | async" [value]="item" [filterString]="item.name">
+	    		<img class="item-icon" src="{{item.icon}}"/>
+    			<span class="item-name">{{item.name}}</span>
+      		</mdc-autocomplete-list-item>
+    	</mdc-autocomplete-list>
+	</mdc-autocomplete>
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## Development
+
+Feel free to contribute and improve this component library.
+
+Clone the repository:
+
+```
+git clone https://github.com/chemaalfaya/mdcprojects.git
+```
+
+And... happy coding!
+
+
+## License
+
+(The ISC License)
+
+Copyright (c) 2018 Chema Alfaya Montero &lt;chemaalfaya@gmail.com&gt;
+
+Permission to use, copy, modify, and/or distribute this software for any
+purpose with or without fee is hereby granted, provided that the above
+copyright notice and this permission notice appear in all copies.
+
+THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
