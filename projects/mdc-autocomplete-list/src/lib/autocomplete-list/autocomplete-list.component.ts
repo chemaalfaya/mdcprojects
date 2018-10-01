@@ -24,6 +24,7 @@ export class MdcAutocompleteList implements OnInit, AfterContentChecked {
   public set visible(v: boolean) {
     this._visible = v;
     if (v) {
+      this.filterItems();
       this.focusFirstItem();
     } else {
       this.unfocusAllItems();
@@ -43,7 +44,7 @@ export class MdcAutocompleteList implements OnInit, AfterContentChecked {
   constructor() {
     this.maxVisibleItems = Number.POSITIVE_INFINITY;
     this._visible = false;
-    this._filter = undefined;
+    this._filter = '';
   }
 
   ngOnInit() {
